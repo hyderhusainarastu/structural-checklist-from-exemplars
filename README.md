@@ -29,26 +29,39 @@ The output is evidence-based and falsifiable: every claim in the governing-patte
 back to a specific passage in a specific exemplar, and every checklist item can be marked pass/fail
 by a reviewer holding only the target document.
 
-## Installation
+## Works with
 
-This is an [Agent Skill](https://www.anthropic.com/) following the portable `SKILL.md` convention —
-a folder with a `SKILL.md` file (YAML frontmatter + instructions) that any compatible agent runtime
-can load.
+| Surface | How | Status |
+|---|---|---|
+| Claude Code | native skill (`./install.sh --claude`) | not tested |
+| Codex | native skill via `.agents/skills` (`./install.sh --agents`) | not tested |
+| Gemini CLI | native skill via `.agents/skills`, or pointer (`--gemini`) | not tested |
+| Cursor | native skill via `.agents/skills`, or `AGENTS.md` (`--cursor`) | not tested |
+| Copilot | pointer to the skill (`--copilot`) | not tested |
+| ChatGPT / Claude.ai / Gemini (chat) | prompt (`PROMPT.md`) | not tested |
 
-- **Claude Code**: copy this folder into `.claude/skills/structural-checklist-from-exemplars/` in
-  your project (or the user-level skills directory for a global install).
-- **Any other runtime that supports the `SKILL.md` convention**: copy this folder into that
-  runtime's equivalent skills directory. No build step, no dependencies — it's instructions only.
+The installer itself is tested offline (`bash test_install.sh`). The skill is instructions only; the SKILL.md follows the open [Agent Skills specification](https://agentskills.io/specification).
+
+## Quick start
+
+```sh
+git clone https://github.com/hyderhusainarastu/structural-checklist-from-exemplars
+cd structural-checklist-from-exemplars
+./install.sh --claude              # ~/.claude/skills/structural-checklist-from-exemplars
+./install.sh --agents --project .  # .agents/skills (Codex, Cursor, Gemini CLI)
+./install.sh --help                # all targets; --dry-run and --uninstall supported
+```
+
+Chat UIs: paste `PROMPT.md`, or the short version below.
+
+### Copy-paste prompt
 
 ```
-your-project/.claude/skills/structural-checklist-from-exemplars/
-├── SKILL.md
-├── README.md
-├── LICENSE
-├── references/
-│   └── comparison-table-template.md
-└── examples/
-    └── synthetic-postmortem-example.md
+I want a structural checklist for this document genre: <genre>.
+Below are <N> strong exemplars. Read each in full; do not use memory of the genre.
+1. Compare them on structure (opening, evidence, gap, differentiation, proportions, closing), quoting passages.
+2. Separate universal conventions from sub-genre or venue ones.
+3. Output a numbered checklist where every item is pass/fail by inspection, then audit my draft against it and rank the biggest deviations.
 ```
 
 ## Usage example (synthetic)
@@ -72,3 +85,26 @@ in the close reading and reconciliation, which doesn't reduce to a script.
 ## License
 
 MIT — see [LICENSE](./LICENSE).
+
+## How it differs
+
+Generic writing templates and genre guides give a fixed outline. This skill builds the checklist from the exemplars you supply and ties every item to a located passage, so it can be checked and challenged.
+
+## Limits
+
+- Instructions only; quality depends on the exemplars you give and on the model reading them in full.
+- Fewer than three exemplars gives weak, non-generalizable findings.
+- Proportion measures need the full text of each exemplar.
+
+## Related
+
+- [pre-submission-manuscript-audit](https://github.com/hyderhusainarastu/pre-submission-manuscript-audit)
+- [manuscript-mechanical-qa-sweep-pipeline](https://github.com/hyderhusainarastu/manuscript-mechanical-qa-sweep-pipeline)
+- [hallucinated-citation-checker](https://github.com/hyderhusainarastu/hallucinated-citation-checker)
+
+## Keywords
+
+structural checklist, genre analysis, exemplar comparison, document structure, technical writing, postmortem, editing, agent skill, SKILL.md
+
+---
+Part of palimnote-skills - more at https://github.com/hyderhusainarastu

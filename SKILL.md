@@ -1,6 +1,6 @@
 ---
 name: structural-checklist-from-exemplars
-description: Derives a reusable, mechanically verifiable structural checklist for any document genre (papers, reports, proposals, technical postmortems, long-form posts, grant applications, etc.) by comparatively analyzing a set of strong exemplar documents at the structure level, then applying that checklist to a target draft. Invoke when someone needs to write or revise a document in a genre they want to get structurally right, has (or can gather) several strong examples of that genre, and wants a standard derived from close reading of those examples rather than from convention, memory, or a generic template.
+description: Derives a mechanically verifiable structural checklist for any document genre (papers, proposals, postmortems, posts) by comparing strong exemplars, then audits a draft against it. Use when you want a genre's structure standard built from real examples, not convention.
 ---
 
 # Structural Checklist from Exemplars
